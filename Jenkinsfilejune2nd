@@ -14,7 +14,7 @@ node{
     
    stage('CheckoutCode'){
        
-       git branch: 'development', credentialsId: '5cce856d-5e92-438d-b284-5dd624bb1305', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
+       git branch: 'development', credentialsId: '9712b428-c333-481c-b1ff-2c134d9b803d', url: 'https://github.com/ultranos/maven-web-application.git'
    }
    
    stage('Build'){
@@ -22,7 +22,7 @@ node{
      sh  "${mvnHome}/bin/mvn clean package"
    }
    
-   /*
+   
    stage('ExecuteSonarQubeReport'){
        
       sh  "${mvnHome}/bin/mvn sonar:sonar"  
@@ -38,11 +38,11 @@ node{
    stage('DeployAppIntoTomcat'){
        
       sshagent(['tomcatServer']) {
-           sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.234.32.110:/opt/apache-tomcat-9.0.20/webapps/maven-web-application.war"
+           sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.235.241.50:/opt/apache-tomcat-9.0.24/webapps/maven-web-application.war"
       } 
    }
-   */
    
+   /*
    stage('SendEmailNotification'){
        
        mail bcc: '', body: '''Build is over.
@@ -52,5 +52,5 @@ Mithun Technologies,
 9980923226.
 ''', cc: 'ajay.aak@gmail.com, reddygs24@gmail.com', from: '', replyTo: '', subject: 'Build is over', to: 'devopstrainingblr@gmail.com'
    }
-    
+   */
 }
